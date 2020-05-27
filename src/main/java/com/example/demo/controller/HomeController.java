@@ -35,7 +35,9 @@ public class HomeController {
 
     {
         Optional<String> optional = serverRequest.queryParam("id");
-        return ServerResponse.ok().body(baseMongoRepo.findByProductId(Mono.just((optional.get()))).flatMap(a -> Flux.just(CSEDetailsResponse.convertToResponse((CSEDetails) a))),CSEDetailsResponse.class);
+        return ServerResponse.ok()
+                .body(baseMongoRepo.findByProductId(Mono.just((optional.get())))
+                        .flatMap(a -> Flux.just(CSEDetailsResponse.convertToResponse((CSEDetails) a))),CSEDetailsResponse.class);
 
     }
 
